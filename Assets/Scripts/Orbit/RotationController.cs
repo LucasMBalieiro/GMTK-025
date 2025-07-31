@@ -94,8 +94,7 @@ public class RotationController : MonoBehaviour
         
         _currentState = ProjectileState.Launched;
         
-        Vector3 launchDirection = (transform.position - orbitTarget.position).normalized;
-        Vector3 targetPosition = transform.position + launchDirection * _launchDistance; 
+        Vector3 targetPosition = transform.position + desiredDirection * _launchDistance; 
         
         // Atira
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
