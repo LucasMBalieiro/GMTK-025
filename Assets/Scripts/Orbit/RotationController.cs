@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class RotationController : MonoBehaviour
@@ -40,6 +41,8 @@ public class RotationController : MonoBehaviour
     private bool _isSpinning = false;
     
     private SpriteRenderer _spriteRenderer;
+    
+    public UnityEvent<bool> onShooting = new UnityEvent<bool>();
 
     private void Start()
     {
@@ -72,6 +75,7 @@ public class RotationController : MonoBehaviour
     private IEnumerator ShootSequence(Vector3 mouseWorldPosition)
     {
         _currentState = ProjectileState.Waiting;
+        onShooting.Invoke(true);
         
         Vector3 desiredDirection = (mouseWorldPosition - orbitTarget.position);
         desiredDirection.Normalize();
@@ -112,6 +116,7 @@ public class RotationController : MonoBehaviour
         
         transform.localPosition = new Vector3(currentDirection.x * orbitDistance, currentDirection.y * orbitDistance, currentDirection.z); 
         _currentState = ProjectileState.Orbiting;
+        onShooting.Invoke(false);
         _orbitSpeed = startOrbitSpeed;
     }
 

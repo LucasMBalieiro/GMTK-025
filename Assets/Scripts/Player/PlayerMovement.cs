@@ -6,17 +6,20 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private RotationController rotationController;
+    [SerializeField] private TeleportController teleportController;
     private Camera _camera;
     private Rigidbody2D _rb;
     private Vector2 _input;
 
     private int _arrowKeysHeld = 0;
     private Vector3 _lastArrowDirection = Vector3.zero;
+    private bool _isShooting;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _camera = Camera.main;
+        rotationController.onShooting.AddListener(ToggleIsShooting);
     }
 
     private void Update()
@@ -105,9 +108,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Teleport()
     {
-        if (rotationController.GetCurrentState() == RotationController.ProjectileState.Orbiting && Input.GetKeyDown(KeyCode.Space))
+        if (!_isShooting && Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("teleporting");
+            teleportController.Teleport();
         }
+    }
+
+    private void ToggleIsShooting(bool value)
+    {
+        _isShooting = value;
     }
 }
