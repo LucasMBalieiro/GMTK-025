@@ -14,6 +14,7 @@ public class RotationController : MonoBehaviour
     }
 
     [SerializeField] private Transform orbitTarget;
+    [SerializeField] private float orbitDistance;
     
     [Header("Orbit")]
     [SerializeField] private float startOrbitSpeed;
@@ -26,8 +27,8 @@ public class RotationController : MonoBehaviour
     
     [Header("Shoot")]
     [SerializeField] private float launchSpeed;
-    [SerializeField] private float launchDistanceMin;
-    [SerializeField] private float launchDistanceMax;
+    [SerializeField] private float returnSpeed;
+    [SerializeField] private float launchDistance;
     [SerializeField] private float launchAcceleration;
     [SerializeField] [Range(0.9f, 0.99f)] private float precision;
     
@@ -36,19 +37,16 @@ public class RotationController : MonoBehaviour
     
     private float _orbitSpeed;
     private float _rotationSpeed;
-    private float _launchDistance;
     private bool _isSpinning = false;
     
     private SpriteRenderer _spriteRenderer;
 
     private void Start()
     {
-        // ta hardcodado, tem que trocar esse 0.5 pra pegar o raio que a gente quer (tava fznd gambiarra com a "circunferencia" q tem)
-        transform.localPosition = new Vector3(0.5f, 0, 0);
+        transform.localPosition = new Vector3(orbitDistance, 0, 0);
         
         _orbitSpeed = startOrbitSpeed;
         _rotationSpeed = startRotationSpeed;
-        _launchDistance = launchDistanceMin;
         
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -94,7 +92,7 @@ public class RotationController : MonoBehaviour
         
         _currentState = ProjectileState.Launched;
         
-        Vector3 targetPosition = transform.position + desiredDirection * _launchDistance; 
+        Vector3 targetPosition = transform.position + desiredDirection * launchDistance; 
         
         // Atira
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
@@ -108,13 +106,13 @@ public class RotationController : MonoBehaviour
         // Retorna
         while (Vector3.Distance(transform.position, orbitTarget.position) > 1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, orbitTarget.position, launchSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, orbitTarget.position, returnSpeed * Time.deltaTime);
             yield return null;
         }
         
-        //Gambiarra do caraio, n é mt bom estar hardcodado
-        transform.localPosition = new Vector3(currentDirection.x/2, currentDirection.y/2, currentDirection.z); 
+        transform.localPosition = new Vector3(currentDirection.x * orbitDistance, currentDirection.y * orbitDistance, currentDirection.z); 
         _currentState = ProjectileState.Orbiting;
+        _orbitSpeed = startOrbitSpeed;
     }
 
     public void SetSpinning(bool isSpinning)
@@ -138,9 +136,6 @@ public class RotationController : MonoBehaviour
         
         _orbitSpeed = Mathf.MoveTowards(_orbitSpeed, targetSpeed, orbitAcceleration * Time.deltaTime);
 
-        //Codigo satanico do Rider transformando tudo em ternario
-        _launchDistance = _isSpinning ? Mathf.MoveTowards(_launchDistance, launchDistanceMax, launchAcceleration * Time.deltaTime) : launchDistanceMin;
-
         if (_orbitSpeed > orbitSpeedTresholdToLaunch)
         {
             _spriteRenderer.color = new Color(255f, 0f, 0f, 255f);
@@ -149,5 +144,10 @@ public class RotationController : MonoBehaviour
         {
             _spriteRenderer.color = new Color(100f, 255f, 255f, 255f);
         }
+    }
+
+    public ProjectileState GetCurrentState()
+    {
+        return _currentState;
     }
 }

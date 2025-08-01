@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Camera _camera;
     private Rigidbody2D _rb;
     private Vector2 _input;
-    
+
     private int _arrowKeysHeld = 0;
     private Vector3 _lastArrowDirection = Vector3.zero;
 
@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         MouseShooting();
         KeyBoardShooting();
+        Teleport();
     }
 
     private void FixedUpdate()
@@ -44,40 +45,69 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             rotationController.SetSpinning(false);
-            
+
             Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPosition.z = 0f; 
-            
+            mouseWorldPosition.z = 0f;
+
             rotationController.Shoot(mouseWorldPosition);
         }
     }
-    
+
     private void KeyBoardShooting()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))    { _arrowKeysHeld++; _lastArrowDirection = Vector3.up; }
-        if (Input.GetKeyDown(KeyCode.DownArrow))  { _arrowKeysHeld++; _lastArrowDirection = Vector3.down; }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))  { _arrowKeysHeld++; _lastArrowDirection = Vector3.left; }
-        if (Input.GetKeyDown(KeyCode.RightArrow)) { _arrowKeysHeld++; _lastArrowDirection = Vector3.right; }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            _arrowKeysHeld++;
+            _lastArrowDirection = Vector3.up;
+        }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            _arrowKeysHeld++;
+            _lastArrowDirection = Vector3.down;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            _arrowKeysHeld++;
+            _lastArrowDirection = Vector3.left;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            _arrowKeysHeld++;
+            _lastArrowDirection = Vector3.right;
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) ||
+            Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             rotationController.SetSpinning(true);
         }
 
         // Infelizmente esse é o jeito mais facil...
-        if (Input.GetKeyUp(KeyCode.UpArrow))    _arrowKeysHeld--;
-        if (Input.GetKeyUp(KeyCode.DownArrow))  _arrowKeysHeld--;
-        if (Input.GetKeyUp(KeyCode.LeftArrow))  _arrowKeysHeld--;
+        if (Input.GetKeyUp(KeyCode.UpArrow)) _arrowKeysHeld--;
+        if (Input.GetKeyUp(KeyCode.DownArrow)) _arrowKeysHeld--;
+        if (Input.GetKeyUp(KeyCode.LeftArrow)) _arrowKeysHeld--;
         if (Input.GetKeyUp(KeyCode.RightArrow)) _arrowKeysHeld--;
 
-        if (_arrowKeysHeld == 0 && (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)))
+        if (_arrowKeysHeld == 0 && (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) ||
+                                    Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)))
         {
             rotationController.SetSpinning(false);
             if (_lastArrowDirection != Vector3.zero)
             {
-                Vector3 targetPosition = transform.position + _lastArrowDirection * 10f; 
+                Vector3 targetPosition = transform.position + _lastArrowDirection * 10f;
                 rotationController.Shoot(targetPosition);
             }
+        }
+    }
+
+    private void Teleport()
+    {
+        if (rotationController.GetCurrentState() == RotationController.ProjectileState.Orbiting && Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("teleporting");
         }
     }
 }
