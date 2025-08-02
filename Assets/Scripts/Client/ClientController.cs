@@ -15,13 +15,11 @@ public class ClientController : MonoBehaviour
     private GameObject _table;
     
     [SerializeField] private SpriteRenderer itemSlot;
-    [SerializeField] private BoxCollider2D boxCollider;
 
     public void Awake()
     {
         _clientAnimation = GetComponent<ClientAnimation>();
-        _clientAnimation.OnAnimationEnd += ShowItem;
-        boxCollider.enabled = false;
+        _clientAnimation.OnAnimationEnd += ShowOrder;
     }
 
     public void Initialize(SpawnManager spawnManager, ClientData clientData, ItemData itemData, Transform seatPosition, bool isFacingUp, GameObject table, int tableIndex, int slotIndex)
@@ -35,13 +33,16 @@ public class ClientController : MonoBehaviour
         _slotIndex = slotIndex;
     }
     
-    private void ShowItem()
+    private void ShowOrder()
+    {
+        Table table = _table.GetComponent<Table>();
+        table.EnableTable();
+        table.AddItem(_slotIndex, _itemData, this);
+    }
+
+    public void ShowItem()
     {
         itemSlot.sprite = _itemData.itemSprite;
-        boxCollider.enabled = true;
-        
-        Table table = _table.GetComponent<Table>();
-        table.AddItem(_slotIndex, _itemData, this);
     }
     
     public void FinalizeClient()
