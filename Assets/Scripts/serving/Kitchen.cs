@@ -12,6 +12,7 @@ public class Kitchen : InteractableStation
 
     public static readonly UnityEvent<OrderEntity> OnOrderQueued = new();
     public static readonly UnityEvent<OrderEntity, float> OnOrderUpdated = new();
+    public static readonly UnityEvent<OrderEntity> OnOrderTaken = new();
     
     private void Awake()
     {
@@ -24,7 +25,13 @@ public class Kitchen : InteractableStation
 
     protected override void Interact()
     {
-        Debug.Log("Interaction with kitchen: grab order");
+        // Dequeue
+        if (_doneOrders.Count <= 0)
+            return;
+        
+        var orderToTake = _doneOrders.Dequeue();
+        if(PlayerSlot.Instance.AddOrderToSlot(orderToTake))
+            OnOrderTaken?.Invoke(orderToTake);
     }
     
     private void ProcessOrder(List<ItemData> order)
