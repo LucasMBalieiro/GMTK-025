@@ -23,8 +23,7 @@ public class GameManager : MonoBehaviour
     private Dictionary<int, ClientData> clientDictionary;
     private Dictionary<int, ItemData> itemDictionary;
     
-    [SerializeField] private Image fadeScreen;
-    [SerializeField] private Button resetDayButton;
+    public event Action OnEndDay;
     
     private void Awake()
     {
@@ -48,19 +47,8 @@ public class GameManager : MonoBehaviour
     
     public void EndDay()
     {
-        Tweener tweener = fadeScreen.DOFade(1f, 3f)
-            .OnComplete(() =>
-            {
-                resetDayButton.gameObject.SetActive(true);
-                resetDayButton.interactable = true;
-            });
+        OnEndDay?.Invoke();
     }
-
-    public void RestartDay()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
     
     ////////// DICIONARIOS //////////
     private void PopulateCharacterDictionary()
