@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ClientTable
 {
@@ -22,6 +23,7 @@ public class Table : InteractableStation
     private Dictionary<int, ClientTable> orders = new Dictionary<int, ClientTable>();
     
     private bool wasAtended = false;
+    public static readonly UnityEvent<List<ItemData>> OnOrderMade = new();
     
     protected override void Interact()
     {

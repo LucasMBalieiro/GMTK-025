@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ItemTest
   m_EditorClassIdentifier: 
   itemName: Hamburger
+  cookingTime: {x: 1, y: 3}
   itemSprite: {fileID: 21300000, guid: d6e0a580c56e9a448a41e4e7855d0b0d, type: 3}
