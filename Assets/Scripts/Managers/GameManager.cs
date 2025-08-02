@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -19,6 +22,8 @@ public class GameManager : MonoBehaviour
     
     private Dictionary<int, ClientData> clientDictionary;
     private Dictionary<int, ItemData> itemDictionary;
+    
+    public event Action OnEndDay;
     
     private void Awake()
     {
@@ -39,11 +44,11 @@ public class GameManager : MonoBehaviour
         return dayTimer;
     }
 
-    public void IncrementDay()
+    
+    public void EndDay()
     {
-        currentDay++;
+        OnEndDay?.Invoke();
     }
-
     
     ////////// DICIONARIOS //////////
     private void PopulateCharacterDictionary()
@@ -87,5 +92,11 @@ public class GameManager : MonoBehaviour
         }
         
         Table.OnOrderMade?.Invoke(order);
+    }
+
+    [Button("End Day")]
+    public void EndGameButton()
+    {
+        EndDay();
     }
 }

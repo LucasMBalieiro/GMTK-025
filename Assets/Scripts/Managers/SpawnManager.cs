@@ -52,7 +52,7 @@ public class SpawnManager : MonoBehaviour
             else
             {
                 Debug.Log("Dia acabou");
-                //rola algum event no gameManager pra passar pra prox fase ou algo do tipo
+                gm.EndDay();
                 yield break;
             }
             
