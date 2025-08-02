@@ -32,8 +32,10 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             var isUp = directionWalked.y > 0;
-            pivot.position = new Vector3(pivot.position.x, pivot.position.y + ((isUp ? 1 : -1) * walkDistance), pivot.position.z);
+            pivot.position = new Vector3(pivot.position.x, pivot.position.y + ((isUp ? 1 : -1) * walkDistance),
+                pivot.position.z);
         }
+
 
         _walkTween = transform.DOMove(pivot.position, walkDuration)
             .SetEase(Ease.Linear)

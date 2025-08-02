@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -70,5 +72,20 @@ public class GameManager : MonoBehaviour
     public ItemData GetRandomItem()
     {
         return itemDictionary[UnityEngine.Random.Range(0, itemDictionary.Count)];
+    }
+
+    [Button("Simulate Order")]
+    public void SimulateOrder()
+    {
+        var orderSize = Random.Range(1, 4);
+        var order = new List<ItemData>();
+
+        for (var i = 0; i < orderSize; i++)
+        {
+            var item = GetRandomItem();
+            order.Add(item);
+        }
+        
+        Table.OnOrderMade?.Invoke(order);
     }
 }
