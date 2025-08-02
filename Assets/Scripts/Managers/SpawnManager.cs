@@ -3,18 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Desks
-{
-    public Transform deskPosition;
-    public bool isFacingUp;
-}
-
 public class SpawnManager : MonoBehaviour
 {
     //Vai usar grid? trocar de transform pra grid
     [Header("Posições nas mesas")]
-    [SerializeField] private Desks[] deskPositions;
+    [SerializeField] private GameObject[] deskGameObjects;
     private bool[] _isPositionFree;
     
     [Header("Prefab")]
@@ -25,9 +18,9 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        _isPositionFree = new bool[deskPositions.Length];
+        _isPositionFree = new bool[deskGameObjects.Length];
 
-        for (int i = 0; i < deskPositions.Length; i++)
+        for (int i = 0; i < deskGameObjects.Length; i++)
         {
             _isPositionFree[i] = true;
         }
@@ -36,11 +29,11 @@ public class SpawnManager : MonoBehaviour
 
         _dayTimer = gm.GetDayTimer();
 
-        StartCoroutine(SpawnClient());
+        StartCoroutine(CheckAvailableTables());
 
     }
 
-    private IEnumerator SpawnClient()
+    private IEnumerator CheckAvailableTables()
     {
         while (true)
         {
@@ -53,7 +46,7 @@ public class SpawnManager : MonoBehaviour
                 if (positionIndex != -1)
                 {
                     yield return new WaitForSeconds(2f);
-                    GenerateClientItem(positionIndex);
+                    SetupTable( deskGameObjects[positionIndex], positionIndex);
                 }
             }
             else
@@ -70,7 +63,7 @@ public class SpawnManager : MonoBehaviour
 
     private int CheckIfPositionIsFree()
     {
-        for (int i = 0; i < deskPositions.Length; i++)
+        for (int i = 0; i < deskGameObjects.Length; i++)
         {
             if (_isPositionFree[i])
             {
@@ -85,13 +78,25 @@ public class SpawnManager : MonoBehaviour
     {
         _isPositionFree[positionIndex] = true;
     }
+
+    private void SetupTable(GameObject table, int tableIndex)
+    {
+        int numClients = UnityEngine.Random.Range(1, table.transform.childCount+1);
+
+        for (int i = 0; i < numClients; i++)
+        {
+            bool isFacingUp = (i % 2 == 0);
+            
+            GenerateClientItem(table, table.transform.GetChild(i).transform, isFacingUp, tableIndex, i);
+        }
+    }
     
-    private void GenerateClientItem(int positionIndex)
+    private void GenerateClientItem(GameObject table, Transform seatPosition, bool isFacingUp, int tableIndex, int slotIndex)
     {
         GameObject newClient = Instantiate(clientPrefab, transform.position, Quaternion.identity);
         
         ClientController clientController = newClient.GetComponent<ClientController>();
         
-        clientController.Initialize(this, gm.GetRandomClient(), gm.GetRandomItem(), deskPositions[positionIndex].deskPosition, deskPositions[positionIndex].isFacingUp, positionIndex);
+        clientController.Initialize(this, gm.GetRandomClient(), gm.GetRandomItem(), seatPosition, isFacingUp, table, tableIndex, slotIndex);
     }
 }
