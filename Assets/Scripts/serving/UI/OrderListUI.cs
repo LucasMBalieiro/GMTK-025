@@ -19,6 +19,7 @@ public class OrderListUI : MonoBehaviour
     {
         Kitchen.OnOrderQueued.AddListener(AddOrder);
         Kitchen.OnOrderUpdated.AddListener(UpdateOrder);
+        Kitchen.OnOrderTaken.AddListener(RemoveOrder);
     }
     
     private void AddOrder(OrderEntity order)
@@ -35,4 +36,14 @@ public class OrderListUI : MonoBehaviour
     {
         _uiDictionary[order].StartProgress(cookTime);
     }
+    
+    private void RemoveOrder(OrderEntity order)
+    {
+        var orderRef = _uiDictionary[order];
+
+        _uiDictionary.Remove(order);
+        orderRef.gameObject.SetActive(false);
+        Destroy(orderRef.gameObject, .1f);
+    }
+    
 }
