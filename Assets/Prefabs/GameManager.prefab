@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDay: 0
-  dayTimer: 60
+  dayTimer: 3
   clients:
   - {fileID: 11400000, guid: 4db5f193e4f6a2c43bd763e5fc13d566, type: 2}
   items:
   - {fileID: 11400000, guid: 87e11ea27473bdd448d965ea04c142f9, type: 2}
+  fadeScreen: {fileID: 0}
+  resetDayButton: {fileID: 0}

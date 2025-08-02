@@ -37,17 +37,21 @@ public class ClientController : MonoBehaviour
     {
         Table table = _table.GetComponent<Table>();
         table.EnableTable();
-        table.AddItem(_slotIndex, _itemData, this);
+        table.AddItem(_slotIndex, _itemData, this, _spawnManager, _tableIndex);
     }
 
     public void ShowItem()
     {
         itemSlot.sprite = _itemData.itemSprite;
     }
-    
-    public void FinalizeClient()
+
+    public void FinishOrder()
     {
-        _spawnManager.FreePosition(_tableIndex);
+        itemSlot.sprite = null; //Adicionar um check talvez?
+    }
+    
+    public void DeleteClient()
+    {
         Destroy(gameObject);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -28,6 +29,9 @@ public class Table : InteractableStation
     
     private List<ClientController> _clientControllers = new();
     
+    private SpawnManager _spawnManager;
+    private int _tableIndex;
+    
     protected override void Interact()
     {
         if (!isEnabled) return;
@@ -49,7 +53,18 @@ public class Table : InteractableStation
         }
         else
         {
-            
+            if (orders.Count > 0)
+            {
+                int keyToRemove = orders.Keys.First();
+                ClientController clientController = orders[keyToRemove].clientController;
+                clientController.FinishOrder();
+                orders.Remove(keyToRemove);
+
+                if (orders.Count == 0)
+                {
+                    ClearTable();
+                }
+            }
         }
     }
 
@@ -61,8 +76,28 @@ public class Table : InteractableStation
         }
     }
 
-    public void AddItem(int slotIndex, ItemData item, ClientController controller)
+    private void ClearTable()
     {
+        wasAtended = false;
+        isEnabled = false;
+        _spawnManager.FreePosition(_tableIndex);
+        foreach (ClientController clientController in _clientControllers)
+        {
+            clientController.DeleteClient();
+        }
+        orders.Clear();
+        _clientControllers.Clear();
+        
+    }
+
+    public void AddItem(int slotIndex, ItemData item, ClientController controller, SpawnManager spawnManager, int tableIndex)
+    {
+        if (_spawnManager == null)
+        {
+            _spawnManager = spawnManager;
+            _tableIndex = tableIndex;
+        }
+        
         ClientTable clientTable = new ClientTable(slotIndex, item, controller);
         orders.Add(slotIndex, clientTable);
         _clientControllers.Add(controller);

@@ -51,14 +51,14 @@ public class Kitchen : InteractableStation
             var cookingTime = Random.Range(nextOrder.Data.cookingTime.x, nextOrder.Data.cookingTime.y);
 
             OnOrderUpdated?.Invoke(nextOrder, cookingTime);
-            Debug.Log($"Preparing {nextOrder.Data.itemName}. It will take {cookingTime}s to be ready");
+            //Debug.Log($"Preparing {nextOrder.Data.itemName}. It will take {cookingTime}s to be ready");
             
             // Cooks the order
             yield return new WaitForSeconds(cookingTime);
             
             // Move it to done
             _doneOrders.Enqueue(nextOrder);
-            Debug.Log($"{nextOrder.Data.itemName} ready!!");
+            //Debug.Log($"{nextOrder.Data.itemName} ready!!");
         }
     }
     public void StopCooking()

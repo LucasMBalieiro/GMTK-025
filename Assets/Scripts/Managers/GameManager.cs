@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -19,6 +22,9 @@ public class GameManager : MonoBehaviour
     
     private Dictionary<int, ClientData> clientDictionary;
     private Dictionary<int, ItemData> itemDictionary;
+    
+    [SerializeField] private Image fadeScreen;
+    [SerializeField] private Button resetDayButton;
     
     private void Awake()
     {
@@ -39,9 +45,22 @@ public class GameManager : MonoBehaviour
         return dayTimer;
     }
 
-    public void IncrementDay()
+    
+    public void EndDay()
     {
-        currentDay++;
+        Tweener tweener = fadeScreen.DOFade(1f, 3f)
+            .OnComplete(() =>
+            {
+                resetDayButton.gameObject.SetActive(true);
+                resetDayButton.interactable = true;
+            });
+
+    }
+
+    public void RestartDay()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     
@@ -87,5 +106,11 @@ public class GameManager : MonoBehaviour
         }
         
         Table.OnOrderMade?.Invoke(order);
+    }
+
+    [Button("End Day")]
+    public void EndGameButton()
+    {
+        EndDay();
     }
 }
