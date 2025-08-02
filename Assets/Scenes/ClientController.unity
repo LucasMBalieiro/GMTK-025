@@ -626,11 +626,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4594385643733103590, guid: 95d71b47e87257640a65618ed792cf22, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594385643733103590, guid: 95d71b47e87257640a65618ed792cf22, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4594385644442507870, guid: 95d71b47e87257640a65618ed792cf22, type: 3}
       propertyPath: m_RootOrder
@@ -720,6 +720,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7336500196038847652, guid: f9a9f0a546e2833499ceae5c680379fc, type: 3}
   m_PrefabInstance: {fileID: 504671748}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1947929061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5983073079400833875, guid: 99a6226abddfa274db733117f0f17050, type: 3}
+  m_PrefabInstance: {fileID: 1355732734296597236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c865be3bba336484fb5411835a125568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1987301366 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1355732735006469378, guid: 99a6226abddfa274db733117f0f17050, type: 3}
@@ -815,17 +826,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2133807541 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8158030590894397057, guid: b36811ae178186949b237ef6981c2c17, type: 3}
-  m_PrefabInstance: {fileID: 939058469}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e34d349bd3a0746b89c5c91eeb47c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1355732734296597236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -924,7 +924,23 @@ PrefabInstance:
     - target: {fileID: 1355732735006469378, guid: 99a6226abddfa274db733117f0f17050, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2133807541}
+      objectReference: {fileID: 1947929061}
+    - target: {fileID: 1355732735006469378, guid: 99a6226abddfa274db733117f0f17050, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartDay
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355732735006469378, guid: 99a6226abddfa274db733117f0f17050, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FadeInUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5983073079400833875, guid: 99a6226abddfa274db733117f0f17050, type: 3}
+      propertyPath: fadeScreen
+      value: 
+      objectReference: {fileID: 1229341991}
+    - target: {fileID: 5983073079400833875, guid: 99a6226abddfa274db733117f0f17050, type: 3}
+      propertyPath: resetDayButton
+      value: 
+      objectReference: {fileID: 1987301366}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99a6226abddfa274db733117f0f17050, type: 3}
 --- !u!1001 &6006308374038286650
