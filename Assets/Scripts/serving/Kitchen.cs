@@ -2,17 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class Kitchen : InteractableStation
 {
-    private Queue<ItemData> _backlogOrders, _doneOrders;
+    private Queue<OrderEntity> _backlogOrders, _doneOrders;
     private Coroutine _cookCoroutine;
+
+    public static readonly UnityEvent<OrderEntity> OnOrderQueued = new();
+    public static readonly UnityEvent<OrderEntity, float> OnOrderUpdated = new();
     
     private void Awake()
     {
-        _backlogOrders = new Queue<ItemData>();
-        _doneOrders = new Queue<ItemData>();
+        _backlogOrders = new Queue<OrderEntity>();
+        _doneOrders = new Queue<OrderEntity>();
         
         Table.OnOrderMade.AddListener(ProcessOrder);
         _cookCoroutine = StartCoroutine(Cook());
@@ -27,7 +31,9 @@ public class Kitchen : InteractableStation
     {
         foreach (var item in order)
         {
-            _backlogOrders.Enqueue(item);
+            var entity = new OrderEntity(item);
+            _backlogOrders.Enqueue(entity);
+            OnOrderQueued?.Invoke(entity);
             Debug.Log($"Added {item.itemName} to queue");
         }
     }
@@ -42,16 +48,17 @@ public class Kitchen : InteractableStation
             
             // Grabs next order
             var nextOrder = _backlogOrders.Dequeue();
-            var cookingTime = Random.Range(nextOrder.cookingTime.x, nextOrder.cookingTime.y);
+            var cookingTime = Random.Range(nextOrder.Data.cookingTime.x, nextOrder.Data.cookingTime.y);
 
-            Debug.Log($"Preparing {nextOrder.itemName}. It will take {cookingTime}s to be ready");
+            OnOrderUpdated?.Invoke(nextOrder, cookingTime);
+            Debug.Log($"Preparing {nextOrder.Data.itemName}. It will take {cookingTime}s to be ready");
             
             // Cooks the order
             yield return new WaitForSeconds(cookingTime);
             
             // Move it to done
             _doneOrders.Enqueue(nextOrder);
-            Debug.Log($"{nextOrder.itemName} ready!!");
+            Debug.Log($"{nextOrder.Data.itemName} ready!!");
         }
     }
     public void StopCooking()
