@@ -53,17 +53,21 @@ public class Table : InteractableStation
         }
         else
         {
-            if (orders.Count > 0)
-            {
-                int keyToRemove = orders.Keys.First();
-                ClientController clientController = orders[keyToRemove].clientController;
-                clientController.FinishOrder();
-                orders.Remove(keyToRemove);
+            if (orders.Count <= 0) return;
 
-                if (orders.Count == 0)
-                {
-                    ClearTable();
-                }
+            var serverSlot = PlayerSlot.Instance;
+            var slot = serverSlot.GetSlot();
+            if (slot is null) return;
+            
+            var keyToRemove = orders.First(pair => pair.Value.itemData == slot.Data).Key;
+            var clientController = orders[keyToRemove].clientController;
+            
+            serverSlot.RemoveOrderFromSlot();
+            clientController.FinishOrder();
+            orders.Remove(keyToRemove);
+            if (orders.Count == 0)
+            {
+                ClearTable();
             }
         }
     }

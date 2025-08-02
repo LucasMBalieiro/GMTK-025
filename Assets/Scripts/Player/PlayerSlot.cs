@@ -13,10 +13,7 @@ public class PlayerSlot : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance is null)
-            Instance = this;
-        else
-            Destroy(this.gameObject);
+        Instance ??= this;
         
         _currentOrder = null;
         orderRenderer.sprite = null;

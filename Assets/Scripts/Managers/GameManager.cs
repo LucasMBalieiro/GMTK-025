@@ -54,12 +54,10 @@ public class GameManager : MonoBehaviour
                 resetDayButton.gameObject.SetActive(true);
                 resetDayButton.interactable = true;
             });
-
     }
 
     public void RestartDay()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
