@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private List<ClientData> clients;
     [SerializeField] private List<ItemData> items;
+    [SerializeField] private Sprite dotsSprite;
     
     private Dictionary<int, ClientData> clientDictionary;
     private Dictionary<int, ItemData> itemDictionary;
@@ -104,6 +105,11 @@ public class GameManager : MonoBehaviour
     public ItemData GetRandomItem()
     {
         return itemDictionary[UnityEngine.Random.Range(0, itemDictionary.Count)];
+    }
+
+    public Sprite GetDotsSprite()
+    {
+        return dotsSprite;
     }
 
     [Button("Simulate Order")]

@@ -112,13 +112,11 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < numClients; i++)
         {
-            bool isFacingUp = (i % 2 == 0);
-            
-            GenerateClientItem(table, table.transform.GetChild(i).transform, isFacingUp, tableIndex, i);
+            GenerateClientItem(table, table.transform.GetChild(i).transform, tableIndex, i);
         }
     }
     
-    private void GenerateClientItem(GameObject table, Transform seatPosition, bool isFacingUp, int tableIndex, int slotIndex)
+    private void GenerateClientItem(GameObject table, Transform seatPosition, int tableIndex, int slotIndex)
     {
         GameObject newClient = Instantiate(clientPrefab, transform.position, Quaternion.identity);
         ClientController clientController = newClient.GetComponent<ClientController>();
@@ -130,6 +128,6 @@ public class SpawnManager : MonoBehaviour
             clientOrders.Add(gm.GetRandomItem());
         }
 
-        clientController.Initialize(this, gm.GetRandomClient(), clientOrders, seatPosition, isFacingUp, table, tableIndex, slotIndex);
+        clientController.Initialize(this, gm.GetRandomClient(), clientOrders, seatPosition, table, tableIndex, slotIndex);
     }
 }

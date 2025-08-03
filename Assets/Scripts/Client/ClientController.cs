@@ -14,7 +14,8 @@ public class ClientController : MonoBehaviour
     
     private List<ItemData> _orderedItems = new List<ItemData>();
     private int _currentItemIndex = 0;
-    
+
+    [SerializeField] private SpriteRenderer bubbleSpeech;
     [SerializeField] private SpriteRenderer itemSlot;
 
     public void Awake()
@@ -23,19 +24,29 @@ public class ClientController : MonoBehaviour
         _clientAnimation.OnAnimationEnd += ShowOrder;
     }
 
-    public void Initialize(SpawnManager spawnManager, ClientData clientData, List<ItemData> items, Transform seatPosition, bool isFacingUp, GameObject table, int tableIndex, int slotIndex)
+    public void Initialize(SpawnManager spawnManager, ClientData clientData, List<ItemData> items, Transform seatPosition, GameObject table, int tableIndex, int slotIndex)
     {
-        _clientAnimation.Initialize(clientData, seatPosition, isFacingUp);
         
         _table = table;
         _orderedItems = items;
         _spawnManager = spawnManager;
         _tableIndex = tableIndex;
         _slotIndex = slotIndex;
+        
+        
+        _clientAnimation.Initialize(clientData, seatPosition, (_slotIndex % 2 == 0));
     }
     
     private void ShowOrder()
     {
+        if (_slotIndex < 2)
+        {
+            bubbleSpeech.gameObject.transform.position = bubbleSpeech.gameObject.transform.position - new Vector3(1.5f,0f,0f);
+            bubbleSpeech.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        bubbleSpeech.gameObject.SetActive(true);
+        itemSlot.sprite = GameManager.Instance.GetDotsSprite();
+        
         Table table = _table.GetComponent<Table>();
         table.EnableTable();
         table.AddClient(_slotIndex, this, _spawnManager, _tableIndex);
@@ -49,6 +60,7 @@ public class ClientController : MonoBehaviour
         }
         else
         {
+            bubbleSpeech.gameObject.SetActive(false);
             itemSlot.sprite = null;
         }
     }
