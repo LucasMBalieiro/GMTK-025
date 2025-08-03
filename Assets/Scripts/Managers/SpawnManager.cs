@@ -41,6 +41,8 @@ public class SpawnManager : MonoBehaviour
 
     private IEnumerator CheckAvailableTables()
     {
+        var tableSpawnInterval = new WaitForSeconds(1f);
+        
         var positionIndex = CheckIfPositionIsFree();
         if (positionIndex != -1)
         {
@@ -51,7 +53,7 @@ public class SpawnManager : MonoBehaviour
         
         while (true)
         {
-            if (gm.GetDayTimer() > gm.GetDayTimer() / 5f)
+            if (gm.GetDayTimer() > gm.GetDayDuration() / 5f)
             {
                 positionIndex = CheckIfPositionIsFree();
 
@@ -59,7 +61,15 @@ public class SpawnManager : MonoBehaviour
                 {
                     var waitTime = Random.Range(waitSpawnInterval.x, waitSpawnInterval.y);
                     yield return new WaitForSeconds(waitTime);
-                    SetupTable(deskGameObjects[positionIndex], positionIndex);
+                    
+                    int numClients = Random.Range(1, deskGameObjects[positionIndex].transform.childCount+1);
+
+                    for (int i = 0; i < numClients; i++)
+                    {
+                        yield return tableSpawnInterval;
+                        GenerateClientItem(deskGameObjects[positionIndex], deskGameObjects[positionIndex].transform.GetChild(i).transform, positionIndex, i);
+                    }
+                    // SetupTable(deskGameObjects[positionIndex], positionIndex);
                 }
             }
             
@@ -108,12 +118,7 @@ public class SpawnManager : MonoBehaviour
 
     private void SetupTable(GameObject table, int tableIndex)
     {
-        int numClients = Random.Range(1, table.transform.childCount+1);
-
-        for (int i = 0; i < numClients; i++)
-        {
-            GenerateClientItem(table, table.transform.GetChild(i).transform, tableIndex, i);
-        }
+        
     }
     
     private void GenerateClientItem(GameObject table, Transform seatPosition, int tableIndex, int slotIndex)

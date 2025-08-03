@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private Dictionary<int, ItemData> itemDictionary;
 
     public float CurrentXp { get; private set; }
+    public float dayXp { get; private set; }
     public int CurrentLevel { get; private set; }
     [SerializeField] public int xpThreshold;
     public JobRoles CurrentRole; 
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         CurrentDay = 0;
         
         CurrentXp = 0f;
+        dayXp = 0f;
         CurrentLevel = 1;
         CurrentRole = JobRoles.TRAINEE;
     }
@@ -60,6 +62,10 @@ public class GameManager : MonoBehaviour
     public float GetDayTimer()
     {
         return dayTimer;
+    }
+    public float GetDayDuration()
+    {
+        return dayDuration;
     }
 
     private void Update()
@@ -79,6 +85,7 @@ public class GameManager : MonoBehaviour
     public void StartDay()
     {
         dayTimer = dayDuration;
+        dayXp = 0f;
         _dayStarted = true;
     }
     public void EndDay()
@@ -86,6 +93,11 @@ public class GameManager : MonoBehaviour
         _dayStarted = false;
         CurrentDay++;
         OnEndDay?.Invoke();
+    }
+
+    public bool CheckEnd()
+    {
+        return (CurrentRole == JobRoles.GENERAL_MANAGER && CurrentLevel > (int)JobRoles.GENERAL_MANAGER);
     }
     
     ////////// DICIONARIOS //////////
@@ -122,9 +134,13 @@ public class GameManager : MonoBehaviour
         return dotsSprite;
     }
 
-    public (bool leveledUp, bool promoted) GainXp(float xpAmount)
+    public void AddXpToDay(float xpAmount)
     {
-        CurrentXp += xpAmount;
+        dayXp += xpAmount;
+    }
+    public (bool leveledUp, bool promoted) GainXp()
+    {
+        CurrentXp += dayXp;
 
         if (CurrentXp < xpThreshold) 
             return (false, false);

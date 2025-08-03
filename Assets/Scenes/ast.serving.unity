@@ -206,6 +206,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 375679876}
     m_Modifications:
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -498873287
+      objectReference: {fileID: 0}
     - target: {fileID: 7679752393418901233, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -719,8 +727,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ORDERS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7239d482d01d31b4987e8bf656941617, type: 2}
+  m_sharedMaterial: {fileID: -7277376431215394453, guid: 7239d482d01d31b4987e8bf656941617, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -744,8 +752,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1038,6 +1046,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 375679876}
     m_Modifications:
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -498873287
+      objectReference: {fileID: 0}
     - target: {fileID: 7679752393418901233, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1252,6 +1268,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 797853187}
     m_Modifications:
+    - target: {fileID: 4096856705493013425, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096856705493013425, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4096856705493013430, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
       propertyPath: m_Name
       value: '[STATION] DrinkTable'
@@ -1318,6 +1342,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 375679876}
     m_Modifications:
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -498873287
+      objectReference: {fileID: 0}
     - target: {fileID: 7679752393418901233, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1757,6 +1789,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 375679876}
     m_Modifications:
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -498873287
+      objectReference: {fileID: 0}
     - target: {fileID: 7679752393418901233, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2043,6 +2083,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 375679876}
     m_Modifications:
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -498873287
+      objectReference: {fileID: 0}
     - target: {fileID: 7679752393418901233, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2167,7 +2215,7 @@ PrefabInstance:
       objectReference: {fileID: 1879367227}
     - target: {fileID: 8158030590894397057, guid: b36811ae178186949b237ef6981c2c17, type: 3}
       propertyPath: dayDuration
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8158030590894397057, guid: b36811ae178186949b237ef6981c2c17, type: 3}
       propertyPath: xpThreshold
@@ -2224,7 +2272,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 180}
-  m_SizeDelta: {x: 650, y: 180}
+  m_SizeDelta: {x: 600, y: 180}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1826625020
 MonoBehaviour:
@@ -2948,8 +2996,8 @@ MonoBehaviour:
 
     Job: General Manager'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7239d482d01d31b4987e8bf656941617, type: 2}
+  m_sharedMaterial: {fileID: -7277376431215394453, guid: 7239d482d01d31b4987e8bf656941617, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3043,6 +3091,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 375679876}
     m_Modifications:
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -498873287
+      objectReference: {fileID: 0}
     - target: {fileID: 7679752393418901233, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -11,6 +11,8 @@ public class ClientController : MonoBehaviour
     
     private int _tableIndex;
     private int _slotIndex;
+
+    private float _xpAwarded;
     
     private List<ItemData> _orderedItems = new List<ItemData>();
     private int _currentItemIndex = 0;
@@ -32,7 +34,7 @@ public class ClientController : MonoBehaviour
         _spawnManager = spawnManager;
         _tableIndex = tableIndex;
         _slotIndex = slotIndex;
-        
+        _xpAwarded = clientData.awardingXp;
         
         _clientAnimation.Initialize(clientData, seatPosition, (_slotIndex % 2 == 0));
     }
@@ -90,4 +92,6 @@ public class ClientController : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public float GetXp() => _xpAwarded;
 }
