@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
     
     private Dictionary<int, ClientData> clientDictionary;
     private Dictionary<int, ItemData> itemDictionary;
+
+    public float CurrentXp { get; private set; }
+    public int CurrentLevel { get; private set; }
+    [SerializeField] public int xpThreshold;
+    public JobRoles CurrentRole; 
     
     public event Action OnEndDay;
     
@@ -43,7 +48,12 @@ public class GameManager : MonoBehaviour
         
         PopulateCharacterDictionary();
         PopulateItemDictionary();
+        
         currentDay = 0;
+        
+        CurrentXp = 0f;
+        CurrentLevel = 1;
+        CurrentRole = JobRoles.TRAINEE;
     }
 
     public float GetDayTimer()
@@ -106,6 +116,25 @@ public class GameManager : MonoBehaviour
         return itemDictionary[UnityEngine.Random.Range(0, itemDictionary.Count)];
     }
 
+    public (bool leveledUp, bool promoted) GainXp(float xpAmount)
+    {
+        CurrentXp += xpAmount;
+
+        if (CurrentXp < xpThreshold) 
+            return (false, false);
+
+        var promoted = false;
+        CurrentXp -= xpThreshold;
+        CurrentLevel++;
+        if (Enum.IsDefined(typeof(JobRoles), CurrentLevel))
+        {
+            CurrentRole = (JobRoles)CurrentLevel;
+            promoted = true;
+        }
+         
+        return (true, promoted);
+    }
+    
     [Button("Simulate Order")]
     public void SimulateOrder()
     {
