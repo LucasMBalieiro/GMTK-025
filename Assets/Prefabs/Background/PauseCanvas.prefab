@@ -1061,8 +1061,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIElements:
   - {fileID: 0}
+  - {fileID: 0}
   PauseMenu: {fileID: 3263657150421989002}
   OptionsMenu: {fileID: 3263657149843472709}
+  musicSlider: {fileID: 3263657148958792071}
+  sfxSlider: {fileID: 3263657148984051585}
 --- !u!1 &3263657148812521298
 GameObject:
   m_ObjectHideFlags: 0
