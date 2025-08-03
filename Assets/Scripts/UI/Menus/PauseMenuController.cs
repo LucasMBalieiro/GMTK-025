@@ -15,6 +15,12 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
     
     private bool _isPaused = false;
+    
+    private void Start()
+    {
+        musicSlider.onValueChanged.AddListener(AudioManager.Instance.SetMusicVolume);
+        sfxSlider.onValueChanged.AddListener(AudioManager.Instance.SetSFXVolume);
+    }
 
     public void Update()
     {

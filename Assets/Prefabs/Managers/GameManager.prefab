@@ -44,11 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e34d349bd3a0746b89c5c91eeb47c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDay: 0
   dayDuration: 40
   dayTimer: 20
   clients:
   - {fileID: 11400000, guid: 4db5f193e4f6a2c43bd763e5fc13d566, type: 2}
+  - {fileID: 11400000, guid: db691a45a6087eb49b97ad0a3035f986, type: 2}
+  - {fileID: 11400000, guid: 2f8d1dd9088c36046b5a118111d7c129, type: 2}
+  - {fileID: 11400000, guid: f8980ba143f5740498968669c3a7eeb5, type: 2}
   items:
   - {fileID: 11400000, guid: e292cf590e4888842ba1750f4b38f1cd, type: 2}
   - {fileID: 11400000, guid: 1655090a81baa5c45aa346967215eaf6, type: 2}
@@ -59,3 +61,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 803c9a15168c2a34a81d6f1ebce7fa30, type: 2}
   - {fileID: 11400000, guid: d60ab1fddb71f1c4a8fe64ab0c8aa573, type: 2}
   dotsSprite: {fileID: 1340196353, guid: 14560dbc48a9eb34288d573e1b84bb15, type: 3}
+  xpThreshold: 100
+  CurrentRole: 0
