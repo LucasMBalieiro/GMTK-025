@@ -6,13 +6,14 @@ using UnityEngine;
 public class ClientController : MonoBehaviour
 {
     private ClientAnimation _clientAnimation;
-    
     private SpawnManager _spawnManager;
-    private ItemData _itemData;
-    private Transform _destination;
+    private GameObject _table;
+    
     private int _tableIndex;
     private int _slotIndex;
-    private GameObject _table;
+    
+    private List<ItemData> _orderedItems = new List<ItemData>();
+    private int _currentItemIndex = 0;
     
     [SerializeField] private SpriteRenderer itemSlot;
 
@@ -22,12 +23,12 @@ public class ClientController : MonoBehaviour
         _clientAnimation.OnAnimationEnd += ShowOrder;
     }
 
-    public void Initialize(SpawnManager spawnManager, ClientData clientData, ItemData itemData, Transform seatPosition, bool isFacingUp, GameObject table, int tableIndex, int slotIndex)
+    public void Initialize(SpawnManager spawnManager, ClientData clientData, List<ItemData> items, Transform seatPosition, bool isFacingUp, GameObject table, int tableIndex, int slotIndex)
     {
         _clientAnimation.Initialize(clientData, seatPosition, isFacingUp);
         
         _table = table;
-        _itemData = itemData;
+        _orderedItems = items;
         _spawnManager = spawnManager;
         _tableIndex = tableIndex;
         _slotIndex = slotIndex;
@@ -37,12 +38,35 @@ public class ClientController : MonoBehaviour
     {
         Table table = _table.GetComponent<Table>();
         table.EnableTable();
-        table.AddItem(_slotIndex, _itemData, this, _spawnManager, _tableIndex);
+        table.AddClient(_slotIndex, this, _spawnManager, _tableIndex);
     }
 
     public void ShowItem()
     {
-        itemSlot.sprite = _itemData.itemSprite;
+        if (_orderedItems.Count > _currentItemIndex)
+        {
+            itemSlot.sprite = _orderedItems[_currentItemIndex].itemSprite;
+        }
+        else
+        {
+            itemSlot.sprite = null;
+        }
+    }
+    
+    public void CompleteCurrentItem()
+    {
+        _currentItemIndex++;
+        ShowItem();
+    }
+    
+    public ItemData GetCurrentWantedItem()
+    {
+        return IsFinished() ? null : _orderedItems[_currentItemIndex];
+    }
+    
+    public bool IsFinished()
+    {
+        return _currentItemIndex >= _orderedItems.Count;
     }
 
     public void FinishOrder()

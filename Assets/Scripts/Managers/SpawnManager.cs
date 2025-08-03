@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     
     [Header("Prefab")]
     [SerializeField] private GameObject clientPrefab;
+    [SerializeField] private int clientOrdersLimit = 2;
 
     [Header("Random intervals")] 
     [SerializeField, MinMaxSlider(2f, 20f)]
@@ -107,7 +108,7 @@ public class SpawnManager : MonoBehaviour
 
     private void SetupTable(GameObject table, int tableIndex)
     {
-        int numClients = UnityEngine.Random.Range(1, table.transform.childCount+1);
+        int numClients = Random.Range(1, table.transform.childCount+1);
 
         for (int i = 0; i < numClients; i++)
         {
@@ -120,9 +121,15 @@ public class SpawnManager : MonoBehaviour
     private void GenerateClientItem(GameObject table, Transform seatPosition, bool isFacingUp, int tableIndex, int slotIndex)
     {
         GameObject newClient = Instantiate(clientPrefab, transform.position, Quaternion.identity);
-        
         ClientController clientController = newClient.GetComponent<ClientController>();
-        
-        clientController.Initialize(this, gm.GetRandomClient(), gm.GetRandomItem(), seatPosition, isFacingUp, table, tableIndex, slotIndex);
+
+        List<ItemData> clientOrders = new List<ItemData>();
+        int numItems = Random.Range(1, clientOrdersLimit +1);
+        for (int i = 0; i < numItems; i++)
+        {
+            clientOrders.Add(gm.GetRandomItem());
+        }
+
+        clientController.Initialize(this, gm.GetRandomClient(), clientOrders, seatPosition, isFacingUp, table, tableIndex, slotIndex);
     }
 }
