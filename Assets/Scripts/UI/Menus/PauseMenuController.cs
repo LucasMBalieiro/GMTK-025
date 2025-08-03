@@ -9,12 +9,15 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject[] UIElements;
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject OptionsMenu;
+    
+    private bool _isPaused = false;
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseGame();
+            if(_isPaused) ResumeGame();
+            else PauseGame();
         }
     }
 
@@ -22,19 +25,20 @@ public class PauseMenuController : MonoBehaviour
     {
         foreach (var element in UIElements)
         {
-            element.SetActive(false);
+            element.GetComponent<Canvas>().enabled = false;
         }
         PauseMenu.SetActive(true);
-        Time.timeScale = 0;
+        _isPaused = true;
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
+        _isPaused = false;
         PauseMenu.SetActive(false);
+        OptionsMenu.SetActive(false);
         foreach (var element in UIElements)
         {
-            element.SetActive(true);
+            element.GetComponent<Canvas>().enabled = true;
         }
     }
 
