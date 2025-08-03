@@ -51,4 +51,14 @@ public class MenuController : MonoBehaviour
         credits.SetActive(false);
         options.SetActive(true);
     }
+    
+    public void OnMusicVolumeChanged(float volume)
+    {
+        AudioManager.Instance.SetMusicVolume(volume);
+    }
+
+    public void OnSFXVolumeChanged(float volume)
+    {
+        AudioManager.Instance.SetSFXVolume(volume);
+    }
 }
