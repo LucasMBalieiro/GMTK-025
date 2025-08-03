@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class Kitchen : InteractableStation
+public class DrinkTable : InteractableStation
 {
     private Queue<OrderEntity> _backlogOrders, _doneOrders;
     private Coroutine _cookCoroutine;
@@ -17,9 +16,6 @@ public class Kitchen : InteractableStation
     
     private void Awake()
     {
-        _backlogOrders = new Queue<OrderEntity>();
-        _doneOrders = new Queue<OrderEntity>();
-        
         Table.OnOrderMade.AddListener(ProcessOrder);
         _cookCoroutine = StartCoroutine(Cook());
     }
@@ -32,12 +28,6 @@ public class Kitchen : InteractableStation
 
 
         Debug.Log("Getting Order");
-
-        if (_doneOrders.FirstOrDefault().Data.isBeverage)
-        {
-            return;
-        }
-        
         var orderToTake = _doneOrders.Dequeue();
         if(PlayerSlot.Instance.AddOrderToSlot(orderToTake))
             OnOrderTaken?.Invoke(orderToTake);
