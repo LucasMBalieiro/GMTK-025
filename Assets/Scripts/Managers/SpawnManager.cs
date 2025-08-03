@@ -48,7 +48,15 @@ public class SpawnManager : MonoBehaviour
         {
             var waitTime = Random.Range(1f, 3f);
             yield return new WaitForSeconds(waitTime);
-            SetupTable(deskGameObjects[positionIndex], positionIndex);
+            
+            int numClients = Random.Range(1, deskGameObjects[positionIndex].transform.childCount+1);
+
+            for (int i = 0; i < numClients; i++)
+            {
+                yield return tableSpawnInterval;
+                GenerateClientItem(deskGameObjects[positionIndex], deskGameObjects[positionIndex].transform.GetChild(i).transform, positionIndex, i);
+            }
+            //SetupTable(deskGameObjects[positionIndex], positionIndex);
         }
         
         while (true)
@@ -116,10 +124,7 @@ public class SpawnManager : MonoBehaviour
         _isPositionFree[positionIndex] = true;
     }
 
-    private void SetupTable(GameObject table, int tableIndex)
-    {
-        
-    }
+    // private void SetupTable(GameObject table, int tableIndex) { }
     
     private void GenerateClientItem(GameObject table, Transform seatPosition, int tableIndex, int slotIndex)
     {
