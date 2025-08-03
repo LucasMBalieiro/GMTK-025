@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using NaughtyAttributes;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -12,7 +15,11 @@ public class SpawnManager : MonoBehaviour
     
     [Header("Prefab")]
     [SerializeField] private GameObject clientPrefab;
-    
+
+    [Header("Random intervals")] 
+    [SerializeField, MinMaxSlider(2f, 20f)]
+    private Vector2 waitSpawnInterval;
+
     private float _dayTimer;
     private GameManager gm;
 
@@ -26,34 +33,33 @@ public class SpawnManager : MonoBehaviour
         }
         
         gm = GameManager.Instance;
-
-        _dayTimer = gm.GetDayTimer();
+        gm.StartDay();
 
         StartCoroutine(CheckAvailableTables());
-
     }
 
     private IEnumerator CheckAvailableTables()
     {
+        var positionIndex = CheckIfPositionIsFree();
+        if (positionIndex != -1)
+        {
+            var waitTime = Random.Range(1f, 3f);
+            yield return new WaitForSeconds(waitTime);
+            SetupTable(deskGameObjects[positionIndex], positionIndex);
+        }
+        
         while (true)
         {
-            if (_dayTimer > 0f)
+            if (gm.GetDayTimer() > 0f)
             {
-                _dayTimer -= Time.deltaTime;
-                
-                int positionIndex = CheckIfPositionIsFree();
+                positionIndex = CheckIfPositionIsFree();
 
                 if (positionIndex != -1)
                 {
-                    yield return new WaitForSeconds(2f);
-                    SetupTable( deskGameObjects[positionIndex], positionIndex);
+                    var waitTime = Random.Range(waitSpawnInterval.x, waitSpawnInterval.y);
+                    yield return new WaitForSeconds(waitTime);
+                    SetupTable(deskGameObjects[positionIndex], positionIndex);
                 }
-            }
-            else
-            {
-                Debug.Log("Dia acabou");
-                gm.EndDay();
-                yield break;
             }
             
             yield return null;
@@ -63,14 +69,34 @@ public class SpawnManager : MonoBehaviour
 
     private int CheckIfPositionIsFree()
     {
-        for (int i = 0; i < deskGameObjects.Length; i++)
+        // Generate index sequence
+        var idxTable = new int[deskGameObjects.Length];
+        for (var i = 0; i < deskGameObjects.Length; i++)
         {
-            if (_isPositionFree[i])
-            {
-                _isPositionFree[i] = false;
-                return i;
-            }
+            idxTable[i] = i;
         }
+
+        // Shuffle
+        var n = idxTable.Length;
+        while (n > 1)
+        {
+            var k = Random.Range(0, n--); // índice aleatório entre 0 e n-1
+            (idxTable[n], idxTable[k]) = (idxTable[k], idxTable[n]);
+        }
+
+        // Runs through the shuffled tables
+        for (var i = 0; i < deskGameObjects.Length; i++)
+        {
+            var curIdx = idxTable[i];
+            if (curIdx >= 0 && _isPositionFree[curIdx])
+            {
+                _isPositionFree[curIdx] = false;
+                return curIdx;
+            }
+
+            idxTable[i] = -1;
+        }
+
         return -1;
     }
 
