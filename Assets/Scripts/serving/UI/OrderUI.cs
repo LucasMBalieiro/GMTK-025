@@ -34,7 +34,11 @@ public class OrderUI : MonoBehaviour
             
             progressBar.fillAmount = currentProgress / _cookingDuration;
             if (currentProgress >= _cookingDuration)
+            {
                 doneMessage.SetActive(true);
+                AudioManager.Instance.PlaySFX("Order");
+                break;
+            }
             
             yield return null;
         }

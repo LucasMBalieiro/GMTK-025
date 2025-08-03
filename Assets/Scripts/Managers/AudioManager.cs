@@ -103,11 +103,41 @@ public class AudioManager : MonoBehaviour
     
     public void SetMusicVolume(float volume)
     {
-        musicSource.volume = Mathf.Clamp01(volume);
+        if (volume == 0)
+        {
+            musicSource.volume = 0;
+            return;
+        }
+        float volumeInDb = Mathf.Log10(volume) * 20;
+
+        musicSource.volume = Mathf.Pow(10.0f, volumeInDb / 20.0f);
+
     }
     
     public void SetSFXVolume(float volume)
     {
-        sfxSource.volume = Mathf.Clamp01(volume);
+        if (volume == 0)
+        {
+            sfxSource.volume = 0;
+            return;
+        }
+
+        float volumeInDb = Mathf.Log10(volume) * 20;
+        sfxSource.volume = Mathf.Pow(10.0f, volumeInDb / 20.0f);
+    }
+
+    public float GetMusicVolume()
+    {
+        return musicSource.volume;
+    }
+
+    public float GetSFXVolume()
+    {
+        return sfxSource.volume;
+    }
+
+    public void MuteSFX(bool mute)
+    {
+        sfxSource.mute = mute;
     }
 }

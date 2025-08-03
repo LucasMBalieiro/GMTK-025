@@ -22,6 +22,7 @@ public class FadeInUI : MonoBehaviour
         {
             tweener.Kill();
         }
+        AudioManager.Instance.MuteSFX(true);
         tweener = fadeScreen.DOFade(1f, 3f)
             .OnComplete(() =>
             {
@@ -38,6 +39,8 @@ public class FadeInUI : MonoBehaviour
     
     public void RestartDay()
     {
+        AudioManager.Instance.MuteSFX(false);
+        AudioManager.Instance.PlaySFX("Machine_Grab");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

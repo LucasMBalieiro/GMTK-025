@@ -134,5 +134,6 @@ public class SpawnManager : MonoBehaviour
         }
 
         clientController.Initialize(this, gm.GetRandomClient(), clientOrders, seatPosition, table, tableIndex, slotIndex);
+        AudioManager.Instance.PlaySFX("Door");
     }
 }

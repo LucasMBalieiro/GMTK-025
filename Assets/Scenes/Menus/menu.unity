@@ -5529,3 +5529,5 @@ MonoBehaviour:
   options: {fileID: 1721082851}
   howToPlay: {fileID: 1214782257}
   credits: {fileID: 1094184592}
+  sliderMusic: {fileID: 1384821499}
+  SliderSFX: {fileID: 139629046}

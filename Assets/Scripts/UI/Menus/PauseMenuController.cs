@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject[] UIElements;
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject OptionsMenu;
+    
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
     
     private bool _isPaused = false;
 
@@ -44,18 +48,24 @@ public class PauseMenuController : MonoBehaviour
 
     public void OpenOptionsMenu()
     {
+        musicSlider.value = AudioManager.Instance.GetMusicVolume();
+        sfxSlider.value = AudioManager.Instance.GetSFXVolume();
+        
+        AudioManager.Instance.PlaySFX("Machine_Grab");
         PauseMenu.SetActive(false);
         OptionsMenu.SetActive(true);
     }
 
     public void OpenPauseMenu()
     {
+        AudioManager.Instance.PlaySFX("Machine_Grab");
         PauseMenu.SetActive(true);
         OptionsMenu.SetActive(false);
     }
 
     public void QuitGame()
     {
+        AudioManager.Instance.PlaySFX("Machine_Grab");
         SceneManager.LoadScene(0);
     }
 }

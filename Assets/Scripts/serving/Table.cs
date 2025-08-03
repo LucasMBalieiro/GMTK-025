@@ -45,6 +45,7 @@ public class Table : InteractableStation
             }
             OnOrderMade?.Invoke(itemsList);
             wasAtended = true;
+            AudioManager.Instance.PlaySFX("Item_Merge");
         }
         else
         {
@@ -60,6 +61,7 @@ public class Table : InteractableStation
             serverSlot.RemoveOrderFromSlot();
             targetClient.CompleteCurrentItem();
             GameManager.Instance.AddXpToDay(targetClient.GetXp());
+            AudioManager.Instance.PlaySFX("Deliver");
             
             ItemData nextItemToOrder = targetClient.GetCurrentWantedItem();
             
