@@ -25,6 +25,9 @@ public class FadeInUI : MonoBehaviour
         tweener = fadeScreen.DOFade(1f, 3f)
             .OnComplete(() =>
             {
+                if (GameManager.Instance.CheckEnd())
+                    SceneManager.LoadScene("game.over");
+                
                 if (dayEnd)
                 {
                     dayEnd.gameObject.SetActive(true);

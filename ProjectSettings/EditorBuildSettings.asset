@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/bala.scene.unity
     guid: bb7a8e67bcf4d604da0edb1b57445730
+  - enabled: 1
+    path: Assets/Scenes/Menus/game.over.unity
+    guid: 49cc0960013c6624f9f2f66f87f32160
   m_configObjects: {}

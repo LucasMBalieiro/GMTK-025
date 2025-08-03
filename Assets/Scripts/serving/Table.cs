@@ -55,10 +55,11 @@ public class Table : InteractableStation
             if (slot is null) return;
             
             ClientController targetClient = clients.Values.FirstOrDefault(c => c.GetCurrentWantedItem() == slot.Data);
-            if (targetClient == null) return;
+            if (targetClient is null) return;
 
             serverSlot.RemoveOrderFromSlot();
             targetClient.CompleteCurrentItem();
+            GameManager.Instance.AddXpToDay(targetClient.GetXp());
             
             ItemData nextItemToOrder = targetClient.GetCurrentWantedItem();
             
@@ -67,7 +68,10 @@ public class Table : InteractableStation
                 OnOrderMade?.Invoke(new List<ItemData> { nextItemToOrder });
             }
 
-            if (clients.Values.All(c => c.IsFinished())) { ClearTable(); }
+            if (clients.Values.All(c => c.IsFinished()))
+            {
+                Invoke(nameof(ClearTable), Random.Range(1f, 4f));
+            }
         }
     }
 

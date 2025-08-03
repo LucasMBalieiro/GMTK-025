@@ -25,9 +25,8 @@ public class DayEndUI : MonoBehaviour
 
         levelIndicator.text = $"{gm.CurrentLevel}";
         xpBar.fillAmount = gm.CurrentXp / gm.xpThreshold;
-
-        var xpGained = Random.Range(20f, 120f);
-        var (leveledUp, promoted) = gm.GainXp(xpGained);
+        
+        var (leveledUp, promoted) = gm.GainXp();
 
         if (leveledUp)
         {

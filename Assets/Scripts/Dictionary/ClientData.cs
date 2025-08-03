@@ -11,4 +11,5 @@ public class ClientData : ScriptableObject
     public List<Sprite> walkRight;
     public Sprite sittingUp;
     public Sprite sittingDown;
+    [Range(5f, 20f)] public float awardingXp;
 }
