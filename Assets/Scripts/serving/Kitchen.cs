@@ -81,4 +81,9 @@ public class Kitchen : InteractableStation
     {
         StopCoroutine(_cookCoroutine);
     }
+
+    public Queue<OrderEntity> GetDoneOrders()
+    {
+        return _doneOrders;
+    }
 }
