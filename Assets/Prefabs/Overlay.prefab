@@ -115,6 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c865be3bba336484fb5411835a125568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeScreen: {fileID: 1355732735525152723}
+  resetDayButton: {fileID: 1355732735006469378}
 --- !u!1 &1355732734813255539
 GameObject:
   m_ObjectHideFlags: 0

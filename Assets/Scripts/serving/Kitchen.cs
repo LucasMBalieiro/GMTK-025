@@ -28,7 +28,9 @@ public class Kitchen : InteractableStation
         // Dequeue
         if (_doneOrders.Count <= 0)
             return;
-        
+
+
+        Debug.Log("Getting Order");
         var orderToTake = _doneOrders.Dequeue();
         if(PlayerSlot.Instance.AddOrderToSlot(orderToTake))
             OnOrderTaken?.Invoke(orderToTake);

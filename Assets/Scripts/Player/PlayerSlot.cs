@@ -13,7 +13,7 @@ public class PlayerSlot : MonoBehaviour
 
     private void Awake()
     {
-        Instance ??= this;
+        Instance = this;
         
         _currentOrder = null;
         orderRenderer.sprite = null;
