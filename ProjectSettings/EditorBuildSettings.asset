@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/menu.unity
     guid: 1279f4d7784e0d647b536114e0aa13ba
   - enabled: 1
-    path: Assets/Scenes/bala.scene.unity
-    guid: bb7a8e67bcf4d604da0edb1b57445730
+    path: Assets/Scenes/game.scene.unity
+    guid: ed2a6fe86b0f87f4c8cf204e71c3b850
   - enabled: 1
     path: Assets/Scenes/Menus/game.over.unity
     guid: 49cc0960013c6624f9f2f66f87f32160
