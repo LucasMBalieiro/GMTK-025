@@ -2230,9 +2230,25 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8158030590894397057, guid: b36811ae178186949b237ef6981c2c17, type: 3}
+      propertyPath: clients.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158030590894397057, guid: b36811ae178186949b237ef6981c2c17, type: 3}
       propertyPath: items.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 1655090a81baa5c45aa346967215eaf6, type: 2}
+    - target: {fileID: 8158030590894397057, guid: b36811ae178186949b237ef6981c2c17, type: 3}
+      propertyPath: clients.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: db691a45a6087eb49b97ad0a3035f986, type: 2}
+    - target: {fileID: 8158030590894397057, guid: b36811ae178186949b237ef6981c2c17, type: 3}
+      propertyPath: clients.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f8d1dd9088c36046b5a118111d7c129, type: 2}
+    - target: {fileID: 8158030590894397057, guid: b36811ae178186949b237ef6981c2c17, type: 3}
+      propertyPath: clients.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: f8980ba143f5740498968669c3a7eeb5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b36811ae178186949b237ef6981c2c17, type: 3}
 --- !u!1 &1826625018
@@ -3091,14 +3107,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 375679876}
     m_Modifications:
-    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1479405428350349802, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -498873287
-      objectReference: {fileID: 0}
     - target: {fileID: 7679752393418901233, guid: 9a94339c863d1924390f334540d2f26c, type: 3}
       propertyPath: m_RootOrder
       value: 0

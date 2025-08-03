@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         PopulateCharacterDictionary();
         PopulateItemDictionary();
         
-        CurrentDay = 0;
+        CurrentDay = 1;
         
         CurrentXp = 0f;
         dayXp = 0f;
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
     public void EndDay()
     {
         _dayStarted = false;
-        CurrentDay++;
+        CurrentDay += (int)CurrentRole;
         OnEndDay?.Invoke();
     }
 
@@ -155,6 +155,13 @@ public class GameManager : MonoBehaviour
         }
          
         return (true, promoted);
+    }
+
+    public static void DestroyInstance()
+    {
+        var go = Instance.gameObject;
+        Instance = null;
+        Destroy(go);
     }
     
     [Button("Simulate Order")]

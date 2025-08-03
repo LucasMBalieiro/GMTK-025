@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122202ee7c1b35148b5b88b5006ec464, type: 3}
+  m_Name: Client 2
+  m_EditorClassIdentifier: 
+  clientAnimator: {fileID: 22100000, guid: 7e2faf095c8caf2498604772a0b121a6, type: 2}
+  sittingUp: {fileID: -379749875, guid: b703f12b3031d484f89941d041449af6, type: 3}
+  sittingDown: {fileID: 2094118064, guid: b703f12b3031d484f89941d041449af6, type: 3}
+  awardingXp: 12

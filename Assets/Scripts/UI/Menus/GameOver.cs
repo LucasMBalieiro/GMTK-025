@@ -18,6 +18,7 @@ public class GameOver : MonoBehaviour
 
     public void BackToMenu()
     {
+        GameManager.DestroyInstance();
         SceneManager.LoadScene("menu");
     }
 }
