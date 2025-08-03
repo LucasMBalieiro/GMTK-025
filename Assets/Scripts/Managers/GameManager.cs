@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField, ReadOnly] private int currentDay;
+    public int CurrentDay { get; private set; }
     
     [SerializeField] private float dayDuration;
     [ProgressBar("Timer", nameof(dayDuration), EColor.Green)]
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         PopulateCharacterDictionary();
         PopulateItemDictionary();
         
-        currentDay = 0;
+        CurrentDay = 0;
         
         CurrentXp = 0f;
         CurrentLevel = 1;
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     public void EndDay()
     {
         _dayStarted = false;
-        currentDay++;
+        CurrentDay++;
         OnEndDay?.Invoke();
     }
     

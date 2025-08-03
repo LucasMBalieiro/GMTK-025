@@ -39,7 +39,7 @@ public class DayEndUI : MonoBehaviour
                 levelIndicator.text = $"{gm.CurrentLevel}";
                 levelUpMessage.text = $"Congratulations!!!\n";
                 if (promoted)
-                    levelUpMessage.text += $"Promoted to {gm.CurrentRole.ToString()}";
+                    levelUpMessage.text += $"Promoted to {RoleParser.ParseRole(gm.CurrentRole)}";
                 
                 levelUpMessage.gameObject.SetActive(true);
             });
