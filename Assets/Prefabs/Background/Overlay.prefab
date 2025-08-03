@@ -374,8 +374,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 5983073079400833875}
+        m_TargetAssemblyTypeName: FadeInUI, Assembly-CSharp
         m_MethodName: RestartDay
         m_Mode: 1
         m_Arguments:

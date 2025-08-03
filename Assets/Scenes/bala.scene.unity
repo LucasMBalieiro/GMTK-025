@@ -295,17 +295,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &119465755 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5983073079400833875, guid: 99a6226abddfa274db733117f0f17050, type: 3}
-  m_PrefabInstance: {fileID: 1879367225}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c865be3bba336484fb5411835a125568, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &166631493
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,18 +556,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6006308374116877383, guid: 3e3c99e8d37b96e43aa8b59a3d5c7ba0, type: 3}
-      propertyPath: waitSpawnInterval.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6006308374116877383, guid: 3e3c99e8d37b96e43aa8b59a3d5c7ba0, type: 3}
-      propertyPath: waitSpawnInterval.y
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6006308374116877383, guid: 3e3c99e8d37b96e43aa8b59a3d5c7ba0, type: 3}
-      propertyPath: deskGameObjects.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6006308374116877383, guid: 3e3c99e8d37b96e43aa8b59a3d5c7ba0, type: 3}
       propertyPath: deskGameObjects.Array.data[0]
       value: 
       objectReference: {fileID: 6120671468588601668}
@@ -598,10 +575,6 @@ PrefabInstance:
       propertyPath: deskGameObjects.Array.data[4]
       value: 
       objectReference: {fileID: 1312177524}
-    - target: {fileID: 6006308374116877383, guid: 3e3c99e8d37b96e43aa8b59a3d5c7ba0, type: 3}
-      propertyPath: deskGameObjects.Array.data[5]
-      value: 
-      objectReference: {fileID: 1433277994}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e3c99e8d37b96e43aa8b59a3d5c7ba0, type: 3}
 --- !u!1 &257575897
@@ -2061,18 +2034,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Overlay
       objectReference: {fileID: 0}
-    - target: {fileID: 1355732735006469378, guid: 99a6226abddfa274db733117f0f17050, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 119465755}
-    - target: {fileID: 1355732735006469378, guid: 99a6226abddfa274db733117f0f17050, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartDay
-      objectReference: {fileID: 0}
-    - target: {fileID: 1355732735006469378, guid: 99a6226abddfa274db733117f0f17050, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FadeInUI, Assembly-CSharp
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99a6226abddfa274db733117f0f17050, type: 3}
 --- !u!1 &1900295297
@@ -2224,17 +2185,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6980277812053091911, guid: 95d71b47e87257640a65618ed792cf22, type: 3}
   m_PrefabInstance: {fileID: 6980277811108528380}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2019387069 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6980277812053091905, guid: 95d71b47e87257640a65618ed792cf22, type: 3}
-  m_PrefabInstance: {fileID: 6980277811108528380}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df64e4928f29a1d45a9d4afe96772eb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2054533050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,22 +2319,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 797853187}
     m_Modifications:
-    - target: {fileID: 1423841446, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
-      propertyPath: kitchen
-      value: 
-      objectReference: {fileID: 2019387069}
-    - target: {fileID: 4096856705493013425, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096856705493013425, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096856705493013425, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -498873287
-      objectReference: {fileID: 0}
     - target: {fileID: 4096856705493013430, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
       propertyPath: m_Name
       value: '[STATION] DrinkTable'

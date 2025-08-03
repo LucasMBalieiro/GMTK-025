@@ -50,7 +50,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   clientPrefab: {fileID: 233057649805148400, guid: a5908e7e2296e4b43a2da693d494b58a, type: 3}
   clientOrdersLimit: 2
   waitSpawnInterval: {x: 2, y: 12}
