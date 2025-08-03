@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
         
         while (true)
         {
-            if (gm.GetDayTimer() > 0f)
+            if (gm.GetDayTimer() > gm.GetDayTimer() / 5f)
             {
                 positionIndex = CheckIfPositionIsFree();
 

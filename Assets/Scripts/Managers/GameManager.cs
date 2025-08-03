@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField, ReadOnly] private int currentDay;
+    public int CurrentDay { get; private set; }
     
     [SerializeField] private float dayDuration;
     [ProgressBar("Timer", nameof(dayDuration), EColor.Green)]
@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
     
     private Dictionary<int, ClientData> clientDictionary;
     private Dictionary<int, ItemData> itemDictionary;
+
+    public float CurrentXp { get; private set; }
+    public int CurrentLevel { get; private set; }
+    [SerializeField] public int xpThreshold;
+    public JobRoles CurrentRole; 
     
     public event Action OnEndDay;
     
@@ -44,7 +49,12 @@ public class GameManager : MonoBehaviour
         
         PopulateCharacterDictionary();
         PopulateItemDictionary();
-        currentDay = 0;
+        
+        CurrentDay = 0;
+        
+        CurrentXp = 0f;
+        CurrentLevel = 1;
+        CurrentRole = JobRoles.TRAINEE;
     }
 
     public float GetDayTimer()
@@ -74,7 +84,7 @@ public class GameManager : MonoBehaviour
     public void EndDay()
     {
         _dayStarted = false;
-        currentDay++;
+        CurrentDay++;
         OnEndDay?.Invoke();
     }
     
@@ -112,6 +122,25 @@ public class GameManager : MonoBehaviour
         return dotsSprite;
     }
 
+    public (bool leveledUp, bool promoted) GainXp(float xpAmount)
+    {
+        CurrentXp += xpAmount;
+
+        if (CurrentXp < xpThreshold) 
+            return (false, false);
+
+        var promoted = false;
+        CurrentXp -= xpThreshold;
+        CurrentLevel++;
+        if (Enum.IsDefined(typeof(JobRoles), CurrentLevel))
+        {
+            CurrentRole = (JobRoles)CurrentLevel;
+            promoted = true;
+        }
+         
+        return (true, promoted);
+    }
+    
     [Button("Simulate Order")]
     public void SimulateOrder()
     {

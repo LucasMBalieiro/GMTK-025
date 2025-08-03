@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class FadeInUI : MonoBehaviour
 {
     [SerializeField] private Image fadeScreen;
-    [SerializeField] private Button resetDayButton;
+    [SerializeField] private DayEndUI dayEnd;
     private Tweener tweener;
 
     private void Start()
     {
         GameManager.Instance.OnEndDay += EndDay;
+        dayEnd.gameObject.SetActive(false);
+        fadeScreen.DOFade(0f, 0.1f);
     }
     
     public void EndDay()
@@ -23,10 +25,10 @@ public class FadeInUI : MonoBehaviour
         tweener = fadeScreen.DOFade(1f, 3f)
             .OnComplete(() =>
             {
-                if (resetDayButton)
+                if (dayEnd)
                 {
-                    resetDayButton.gameObject.SetActive(true);
-                    resetDayButton.interactable = true;
+                    dayEnd.gameObject.SetActive(true);
+                    dayEnd.OpenUI();
                 }
             });
     }
