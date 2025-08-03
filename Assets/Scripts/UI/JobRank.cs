@@ -4,11 +4,11 @@ using UnityEngine;
 
 public enum JobRoles
 {
-    TRAINEE = 0,
-    SERVER = 1,
-    SUPERVISOR = 3,
-    MANAGER = 5,
-    GENERAL_MANAGER = 8
+    TRAINEE = 1,
+    SERVER = 2,
+    SUPERVISOR = 4,
+    MANAGER = 7,
+    GENERAL_MANAGER = 9
 }
 
 public static class RoleParser
