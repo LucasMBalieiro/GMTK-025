@@ -20,6 +20,8 @@ public class OrderListUI : MonoBehaviour
         Kitchen.OnOrderQueued.AddListener(AddOrder);
         Kitchen.OnOrderUpdated.AddListener(UpdateOrder);
         Kitchen.OnOrderTaken.AddListener(RemoveOrder);
+        
+        DrinkTable.OnOrderTaken.AddListener(RemoveOrder);
     }
     
     private void AddOrder(OrderEntity order)

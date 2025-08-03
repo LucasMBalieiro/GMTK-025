@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4096856705493013431}
   - component: {fileID: 4096856705493013425}
   - component: {fileID: 4096856705493013424}
+  - component: {fileID: 1423841446}
   m_Layer: 0
   m_Name: '[STATION] DrinkTable'
   m_TagString: Untagged
@@ -111,3 +112,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &1423841446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4096856705493013430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ddd5a9f65d45e9b8fd487603603a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionKey: 101
+  kitchen: {fileID: 0}

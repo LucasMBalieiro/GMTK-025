@@ -7,68 +7,59 @@ using Random = UnityEngine.Random;
 
 public class DrinkTable : InteractableStation
 {
-    private Queue<OrderEntity> _backlogOrders, _doneOrders;
-    private Coroutine _cookCoroutine;
+    private Queue<OrderEntity> _drinkBacklog;
+    private Coroutine _prepareCoroutine;
 
-    public static readonly UnityEvent<OrderEntity> OnOrderQueued = new();
-    public static readonly UnityEvent<OrderEntity, float> OnOrderUpdated = new();
     public static readonly UnityEvent<OrderEntity> OnOrderTaken = new();
-    
+
     private void Awake()
     {
+        _drinkBacklog = new Queue<OrderEntity>();
         Table.OnOrderMade.AddListener(ProcessOrder);
-        _cookCoroutine = StartCoroutine(Cook());
+        _prepareCoroutine = StartCoroutine(PrepareDrinks());
     }
 
     protected override void Interact()
     {
-        // Dequeue
-        if (_doneOrders.Count <= 0)
-            return;
+        if(!PlayerSlot.Instance.PlayerSlotIsFree()) return;
+        
+        var orderToTake = OrderManager.Instance.TryTakeCompletedOrder(isBeverage: true);
+        if (orderToTake == null) return;
 
-
-        Debug.Log("Getting Order");
-        var orderToTake = _doneOrders.Dequeue();
-        if(PlayerSlot.Instance.AddOrderToSlot(orderToTake))
+        if (PlayerSlot.Instance.AddOrderToSlot(orderToTake))
+        {
             OnOrderTaken?.Invoke(orderToTake);
+        }
     }
-    
+
     private void ProcessOrder(List<ItemData> order)
     {
         foreach (var item in order)
         {
-            var entity = new OrderEntity(item);
-            _backlogOrders.Enqueue(entity);
-            OnOrderQueued?.Invoke(entity);
-            Debug.Log($"Added {item.itemName} to queue");
+            if (item.isBeverage)
+            {
+                var entity = new OrderEntity(item);
+                _drinkBacklog.Enqueue(entity);
+                
+                Kitchen.OnOrderQueued?.Invoke(entity);
+            }
         }
     }
-
-    private IEnumerator Cook()
+    
+    private IEnumerator PrepareDrinks()
     {
         while (true)
         {
-            // Waits for the backlog to have items
-            if (_backlogOrders.Count <= 0)
-                yield return new WaitUntil(() => _backlogOrders.Count > 0);
-            
-            // Grabs next order
-            var nextOrder = _backlogOrders.Dequeue();
-            var cookingTime = Random.Range(nextOrder.Data.cookingTime.x, nextOrder.Data.cookingTime.y);
+            yield return new WaitUntil(() => _drinkBacklog.Count > 0);
 
-            OnOrderUpdated?.Invoke(nextOrder, cookingTime);
-            //Debug.Log($"Preparing {nextOrder.Data.itemName}. It will take {cookingTime}s to be ready");
+            var nextDrink = _drinkBacklog.Dequeue();
+            var prepTime = Random.Range(nextDrink.Data.cookingTime.x, nextDrink.Data.cookingTime.y);
+
+            Kitchen.OnOrderUpdated?.Invoke(nextDrink, prepTime);
             
-            // Cooks the order
-            yield return new WaitForSeconds(cookingTime);
+            yield return new WaitForSeconds(prepTime);
             
-            // Move it to done
-            _doneOrders.Enqueue(nextOrder);
-            //Debug.Log($"{nextOrder.Data.itemName} ready!!");
+            OrderManager.Instance.AddCompletedOrder(nextDrink);
         }
-    }
-    public void StopCooking()
-    {
-        StopCoroutine(_cookCoroutine);
     }
 }

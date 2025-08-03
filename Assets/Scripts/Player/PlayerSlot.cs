@@ -32,6 +32,11 @@ public class PlayerSlot : MonoBehaviour
         return true;
     }
 
+    public bool PlayerSlotIsFree()
+    {
+        return _currentOrder is null;
+    }
+
     public void RemoveOrderFromSlot()
     {
         if (_currentOrder is null)

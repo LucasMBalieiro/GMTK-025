@@ -1214,6 +1214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797853187}
+  - component: {fileID: 797853188}
   m_Layer: 0
   m_Name: '[STATIONS] '
   m_TagString: Untagged
@@ -1238,6 +1239,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &797853188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797853186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db47e0374c66c74cb4376e62a9d2cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &941354057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2211,6 +2224,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6980277812053091911, guid: 95d71b47e87257640a65618ed792cf22, type: 3}
   m_PrefabInstance: {fileID: 6980277811108528380}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2019387069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6980277812053091905, guid: 95d71b47e87257640a65618ed792cf22, type: 3}
+  m_PrefabInstance: {fileID: 6980277811108528380}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df64e4928f29a1d45a9d4afe96772eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2054533050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,6 +2369,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 797853187}
     m_Modifications:
+    - target: {fileID: 1423841446, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
+      propertyPath: kitchen
+      value: 
+      objectReference: {fileID: 2019387069}
+    - target: {fileID: 4096856705493013425, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096856705493013425, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096856705493013425, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -498873287
+      objectReference: {fileID: 0}
     - target: {fileID: 4096856705493013430, guid: 9a8b6a776d0682a4ca9b76718d7c38b4, type: 3}
       propertyPath: m_Name
       value: '[STATION] DrinkTable'
