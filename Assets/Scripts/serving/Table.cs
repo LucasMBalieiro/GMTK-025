@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -59,8 +60,12 @@ public class Table : InteractableStation
             var slot = serverSlot.GetSlot();
             if (slot is null) return;
             
-            var keyToRemove = orders.First(pair => pair.Value.itemData == slot.Data).Key;
-            var clientController = orders[keyToRemove].clientController;
+            var matchingPair = orders.FirstOrDefault(pair => pair.Value.itemData == slot.Data);
+        
+            if (matchingPair.Value == null) return;
+
+            int keyToRemove = matchingPair.Key;
+            ClientController clientController = matchingPair.Value.clientController;
             
             serverSlot.RemoveOrderFromSlot();
             clientController.FinishOrder();
