@@ -50,6 +50,7 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
             
             int numClients = Random.Range(1, deskGameObjects[positionIndex].transform.childCount+1);
+            deskGameObjects[positionIndex].GetComponent<Table>().SetNumClients(numClients);
 
             for (int i = 0; i < numClients; i++)
             {
@@ -71,6 +72,7 @@ public class SpawnManager : MonoBehaviour
                     yield return new WaitForSeconds(waitTime);
                     
                     int numClients = Random.Range(1, deskGameObjects[positionIndex].transform.childCount+1);
+                    deskGameObjects[positionIndex].GetComponent<Table>().SetNumClients(numClients);
 
                     for (int i = 0; i < numClients; i++)
                     {

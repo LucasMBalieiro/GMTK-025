@@ -24,6 +24,8 @@ public class Table : InteractableStation
 {
     private Dictionary<int, ClientController> clients = new Dictionary<int, ClientController>();
 
+    private int numClients;
+    private int clientCounter;
     private bool isEnabled = false;
     private bool wasAtended = false;
     public static readonly UnityEvent<List<ItemData>> OnOrderMade = new();
@@ -77,12 +79,22 @@ public class Table : InteractableStation
         }
     }
 
-    public void EnableTable() {if (!isEnabled) isEnabled = true;}
+    public void EnableTable()
+    {
+        clientCounter++;
+        Debug.Log("EnableTable: " + clientCounter);
+        if (clientCounter >= numClients)
+        {
+            Debug.Log("Table is full");
+            isEnabled = true;
+        }
+    }
 
     private void ClearTable()
     {
         wasAtended = false;
         isEnabled = false;
+        clientCounter = 0;
         _spawnManager.FreePosition(_tableIndex);
         
         foreach (ClientController client in clients.Values)
@@ -101,6 +113,13 @@ public class Table : InteractableStation
             _tableIndex = tableIndex;
         }
         clients.Add(slotIndex, controller);
+    }
+
+    public void SetNumClients(int numClients)
+    {
+        clientCounter = 0;
+        this.numClients = numClients;
+        Debug.Log("SetNumClients: " + numClients);
     }
 
 }
