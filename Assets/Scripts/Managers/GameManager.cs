@@ -5,6 +5,7 @@ using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,8 +14,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private int currentDay;
-    [SerializeField] private float dayTimer;
+    [SerializeField, ReadOnly] private int currentDay;
+    
+    [SerializeField] private float dayDuration;
+    [ProgressBar("Timer", nameof(dayDuration), EColor.Green)]
+    [ReadOnly] public float dayTimer;
+    
+    private bool _dayStarted;
     
     [Header("Sprites")]
     [SerializeField] private List<ClientData> clients;
@@ -37,6 +43,7 @@ public class GameManager : MonoBehaviour
         
         PopulateCharacterDictionary();
         PopulateItemDictionary();
+        currentDay = 0;
     }
 
     public float GetDayTimer()
@@ -44,9 +51,29 @@ public class GameManager : MonoBehaviour
         return dayTimer;
     }
 
-    
+    private void Update()
+    {
+        if  (!_dayStarted) return;
+        
+        if (dayTimer > 0)
+            dayTimer -= Time.deltaTime;
+        else
+        {
+            Debug.Log("Dia acabou");
+            dayTimer = 0;
+            EndDay();
+        }
+    }
+
+    public void StartDay()
+    {
+        dayTimer = dayDuration;
+        _dayStarted = true;
+    }
     public void EndDay()
     {
+        _dayStarted = false;
+        currentDay++;
         OnEndDay?.Invoke();
     }
     
